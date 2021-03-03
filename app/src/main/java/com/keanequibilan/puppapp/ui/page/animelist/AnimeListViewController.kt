@@ -1,4 +1,4 @@
-package com.keanequibilan.puppapp.ui.page.puppylist
+package com.keanequibilan.puppapp.ui.page.animelist
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
@@ -6,28 +6,28 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
-import com.keanequibilan.puppapp.ui.component.PuppyItem
+import com.keanequibilan.puppapp.ui.component.AnimeItem
+import com.keanequibilan.puppapp.ui.model.Anime
 
-class PuppyListViewController(
-    private val viewModel: PuppyListViewModel
+class AnimeListViewController(
+    private val viewModel: AnimeListViewModel
 ) {
-
     @Composable
     fun Compose() {
         Surface(color = MaterialTheme.colors.background) {
             MaterialTheme {
-                PuppyList(viewModel.items.observeAsState(emptyList()))
+                AnimeList(viewModel.items.observeAsState(emptyList()))
             }
         }
     }
 
     @Composable
-    private fun PuppyList(puppies: State<List<String>>) {
+    private fun AnimeList(anime: State<List<Anime>>) {
         LazyColumn {
             items(
-                count = puppies.value.size
+                count = anime.value.size
             ) { index ->
-                PuppyItem(puppies.value[index]).Compose()
+                AnimeItem(anime.value[index]).Compose()
             }
         }
     }

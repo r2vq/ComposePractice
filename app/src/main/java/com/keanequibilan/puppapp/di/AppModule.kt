@@ -1,6 +1,9 @@
 package com.keanequibilan.puppapp.di
 
 import com.keanequibilan.puppapp.network.DogService
+import com.keanequibilan.puppapp.network.JikanService
+import com.keanequibilan.puppapp.ui.page.animelist.AnimeListViewController
+import com.keanequibilan.puppapp.ui.page.animelist.AnimeListViewModel
 import com.keanequibilan.puppapp.ui.page.puppylist.PuppyListViewController
 import com.keanequibilan.puppapp.ui.page.puppylist.PuppyListViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -18,9 +21,29 @@ val APP_MODULE = module {
             .create(DogService::class.java)
     }
 
+    single {
+        Retrofit.Builder()
+            .baseUrl("https://api.jikan.moe/")
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create(JikanService::class.java)
+    }
+
+    viewModel {
+        AnimeListViewModel(
+            api = get()
+        )
+    }
+
     viewModel {
         PuppyListViewModel(
             api = get()
+        )
+    }
+
+    factory {
+        AnimeListViewController(
+            viewModel = get()
         )
     }
 
