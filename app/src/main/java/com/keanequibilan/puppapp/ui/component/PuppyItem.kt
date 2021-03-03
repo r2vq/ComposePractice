@@ -1,6 +1,7 @@
 package com.keanequibilan.puppapp.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,11 +19,20 @@ class PuppyItem(
 ) {
     @Composable
     fun Compose() {
+        Column {
+            DogImage(url = url)
+            Spacer(modifier = Modifier.height(4.dp))
+        }
+    }
+
+    @Composable
+    fun DogImage(url: String) {
         loadPicture(url = url)
             .value
+            ?.asImageBitmap()
             ?.let { bitmap ->
                 Image(
-                    bitmap = bitmap.asImageBitmap(),
+                    bitmap = bitmap,
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -30,7 +40,6 @@ class PuppyItem(
                         .padding(4.dp),
                     contentScale = ContentScale.FillWidth
                 )
-                Spacer(modifier = Modifier.height(4.dp))
             }
     }
 }
