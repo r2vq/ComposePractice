@@ -2,26 +2,20 @@ package com.keanequibilan.puppapp
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import com.keanequibilan.puppapp.ui.puppylist.PuppyListView
-import com.keanequibilan.puppapp.ui.puppylist.PuppyListViewModel
+import com.keanequibilan.puppapp.ui.page.puppylist.PuppyListViewController
 import com.keanequibilan.puppapp.ui.theme.PuppAppTheme
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    private val puppyListViewModel by viewModels<PuppyListViewModel>()
+    private val puppyListController: PuppyListViewController by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             PuppAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    PuppyListView(puppyListViewModel)
-                }
+                puppyListController.Compose()
             }
         }
     }
