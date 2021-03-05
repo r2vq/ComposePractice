@@ -3,6 +3,7 @@ package com.keanequibilan.puppapp.ui.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomNavigationItems(
@@ -20,5 +21,11 @@ sealed class BottomNavigationItems(
         "anime",
         "Anime",
         Icons.Filled.Person
+    )
+
+    object Pokemon : BottomNavigationItems(
+        "pokemon",
+        "Pokemon",
+        Icons.Filled.Star
     )
 }

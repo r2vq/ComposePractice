@@ -1,8 +1,12 @@
 package com.keanequibilan.puppapp.ui.page
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.keanequibilan.puppapp.ui.component.BottomNav
 import com.keanequibilan.puppapp.ui.navigation.BottomNavigationItems
@@ -23,7 +27,8 @@ class MainScreenViewController(
         val navItems = remember {
             listOf(
                 BottomNavigationItems.Puppies,
-                BottomNavigationItems.Anime
+                BottomNavigationItems.Anime,
+                BottomNavigationItems.Pokemon
             )
         }
 
@@ -35,9 +40,11 @@ class MainScreenViewController(
                 )
             }
         ) {
-            mainScreenNavigationConfiguration.Compose(
-                navController = navController
-            )
+            Box(modifier = Modifier.padding(bottom = 58.dp)) {
+                mainScreenNavigationConfiguration.Compose(
+                    navController = navController
+                )
+            }
         }
     }
 }

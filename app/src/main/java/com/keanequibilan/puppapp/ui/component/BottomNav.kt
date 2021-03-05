@@ -1,6 +1,6 @@
 package com.keanequibilan.puppapp.ui.component
 
-import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -18,7 +18,7 @@ class BottomNav {
         navController: NavHostController,
         items: List<BottomNavigationItems>
     ) {
-        BottomNavigation {
+        BottomAppBar {
             val currentRoute = currentRoute(navController = navController)
             items.forEach { screen ->
                 BottomNavigationItem(
