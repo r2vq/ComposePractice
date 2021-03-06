@@ -1,2 +1,5 @@
-include(":app")
+include(
+    ":app",
+    ":network"
+)
 rootProject.name = "PuppApp"

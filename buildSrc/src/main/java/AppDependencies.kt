@@ -1,9 +1,13 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.project
 
 /**
  * https://medium.com/android-dev-hacks/kotlin-dsl-gradle-scripts-in-android-made-easy-b8e2991e2ba
  */
 object AppDependencies {
+    // modules
+    private const val network = ":network"
+
     // std lib
     private const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
 
@@ -50,9 +54,24 @@ object AppDependencies {
         koin,
         kotlinStdLib,
         lifecycle,
-        material,
+        material
+    )
+
+    val appModules = listOf(
+        network
+    )
+
+    val networkLibraries = listOf(
+        appcompat,
+        coreKtx,
+        koin,
+        kotlinStdLib,
         moshiConverter,
         retrofit
+    )
+
+    val networkModules = listOf<String>(
+
     )
 
     val androidTestLibraries = listOf(
@@ -67,6 +86,10 @@ object AppDependencies {
     @Suppress("unused")
     fun DependencyHandler.kapts(kapt: List<String>) {
         kapt.forEach { dependency -> add("kapt", dependency) }
+    }
+
+    fun DependencyHandler.implementModules(modules: List<String>) {
+        modules.forEach { module -> add("implementation", project(module)) }
     }
 
     fun DependencyHandler.implementations(list: List<String>) {

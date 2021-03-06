@@ -4,7 +4,7 @@ import AppDependencies.implementations
 import AppDependencies.testImplementations
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
 }
 
@@ -13,13 +13,13 @@ android {
     buildToolsVersion(AppConfig.buildToolsVersion)
 
     defaultConfig {
-        applicationId = "com.keanequibilan.puppapp"
         minSdkVersion(AppConfig.minSdk)
         targetSdkVersion(AppConfig.targetSdk)
         versionCode(AppConfig.versionCode)
         versionName(AppConfig.versionName)
 
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        consumerProguardFiles(AppConfig.proguardConsumerRules)
     }
 
     buildTypes {
@@ -37,24 +37,16 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
-        kotlinCompilerVersion = "1.4.30"
     }
 }
 
 dependencies {
     // local libs
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementModules(AppDependencies.appModules)
+    implementModules(AppDependencies.networkModules)
 
     // app libs
-    implementations(AppDependencies.appLibraries)
+    implementations(AppDependencies.networkLibraries)
 
     // test libs
     testImplementations(AppDependencies.testLibraries)
