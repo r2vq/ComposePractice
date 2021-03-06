@@ -7,6 +7,7 @@ import org.gradle.kotlin.dsl.project
 object AppDependencies {
     // modules
     private const val network = ":network"
+    private const val repository = ":repository"
 
     // std lib
     private const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
@@ -58,7 +59,8 @@ object AppDependencies {
     )
 
     val appModules = listOf(
-        network
+        network,
+        repository
     )
 
     val networkLibraries = listOf(
@@ -72,6 +74,17 @@ object AppDependencies {
 
     val networkModules = listOf<String>(
 
+    )
+
+    val repositoryLibraries = listOf(
+        appcompat,
+        coreKtx,
+        koin,
+        kotlinStdLib
+    )
+
+    val repositoryModules = listOf(
+        network
     )
 
     val androidTestLibraries = listOf(

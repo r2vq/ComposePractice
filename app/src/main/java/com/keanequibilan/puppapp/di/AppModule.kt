@@ -1,6 +1,5 @@
 package com.keanequibilan.puppapp.di
 
-import com.keanequibilan.puppapp.app.usecase.PokemonListUseCase
 import com.keanequibilan.puppapp.ui.component.BottomNav
 import com.keanequibilan.puppapp.ui.navigation.MainNavigationConfiguration
 import com.keanequibilan.puppapp.ui.page.MainScreenViewController
@@ -14,12 +13,6 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val APP_MODULE = module {
-    single {
-        PokemonListUseCase(
-            api = get()
-        )
-    }
-
     viewModel {
         AnimeListViewModel(
             api = get()
@@ -28,7 +21,7 @@ val APP_MODULE = module {
 
     viewModel {
         PokemonListViewModel(
-            useCase = get()
+            repo = get()
         )
     }
 

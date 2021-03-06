@@ -4,20 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.keanequibilan.puppapp.app.usecase.PokemonListUseCase
+import com.keanequibilan.puppapp.repository.PokemonRepository
 import com.keanequibilan.puppapp.ui.model.PokemonListItem
 import kotlinx.coroutines.launch
 
 class PokemonListViewModel(
-    val useCase: PokemonListUseCase
+    val repo: PokemonRepository
 ) : ViewModel() {
     private val mutableItems = MutableLiveData(emptyList<PokemonListItem>())
     val items: LiveData<List<PokemonListItem>> = mutableItems
 
     init {
         viewModelScope.launch {
-            useCase
-                .getList()
+            repo
+                .getPokedex()
                 .map { item ->
                     PokemonListItem(
                         id = item.id,

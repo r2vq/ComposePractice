@@ -1,5 +1,6 @@
 include(
     ":app",
-    ":network"
+    ":network",
+    ":repository"
 )
 rootProject.name = "PuppApp"
