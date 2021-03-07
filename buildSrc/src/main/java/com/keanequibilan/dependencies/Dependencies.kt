@@ -30,6 +30,7 @@ const val composeMaterial =
     "androidx.compose.material:material:${Versions.compose}"
 const val composeNavigation =
     "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
+const val composePaging = "androidx.paging:paging-compose:${Versions.composePaging}"
 const val composeRuntime =
     "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
 const val composeUi = "androidx.compose.ui:ui:${Versions.compose}"

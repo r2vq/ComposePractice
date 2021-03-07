@@ -1,3 +1,5 @@
+package com.keanequibilan.dependencies
+
 /**
  * https://medium.com/android-dev-hacks/kotlin-dsl-gradle-scripts-in-android-made-easy-b8e2991e2ba
  */
@@ -11,6 +13,7 @@ object Versions {
     const val compose = "1.0.0-beta01"
     const val composeActivity = "1.3.0-alpha03"
     const val composeNavigation = "1.0.0-alpha08"
+    const val composePaging = "1.0.0-alpha08"
     const val coreKtx = "1.3.2"
     const val glide = "4.12.0"
     const val koin = "2.2.2"

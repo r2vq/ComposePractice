@@ -1,6 +1,7 @@
 import com.keanequibilan.appconfig.AppConfig
 import com.keanequibilan.dependencies.AppDependencies
 import com.keanequibilan.dependencies.TestDependencies
+import com.keanequibilan.dependencies.composePaging
 import com.keanequibilan.ext.androidTestImplementations
 import com.keanequibilan.ext.implementModules
 import com.keanequibilan.ext.implementations
@@ -41,15 +42,15 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = AppConfig.jvmTarget
         useIR = true
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
-        kotlinCompilerVersion = "1.4.30"
+        kotlinCompilerExtensionVersion = AppConfig.composeCompiler
+        kotlinCompilerVersion = AppConfig.kotlinCompiler
     }
 }
 
