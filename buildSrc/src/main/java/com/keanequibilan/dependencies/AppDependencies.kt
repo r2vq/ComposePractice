@@ -1,0 +1,25 @@
+package com.keanequibilan.dependencies
+
+object AppDependencies : Dependencies {
+    override fun libraries(): List<String> = listOf(
+        appcompat,
+        composeActivity,
+        composeMaterial,
+        composeNavigation,
+        composeRuntime,
+        composeUi,
+        composeUiTooling,
+        coreKtx,
+        glide,
+        koin,
+        kotlinStdLib,
+        lifecycle,
+        material
+    )
+
+    override fun modules(): List<String> = listOf(
+        database,
+        network,
+        repository
+    )
+}

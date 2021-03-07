@@ -1,8 +1,11 @@
-import AppDependencies.androidTestImplementations
-import AppDependencies.implementModules
-import AppDependencies.implementations
-import AppDependencies.kapts
-import AppDependencies.testImplementations
+import com.keanequibilan.appconfig.AppConfig
+import com.keanequibilan.dependencies.AppDependencies
+import com.keanequibilan.dependencies.TestDependencies
+import com.keanequibilan.ext.androidTestImplementations
+import com.keanequibilan.ext.implementModules
+import com.keanequibilan.ext.implementations
+import com.keanequibilan.ext.kapts
+import com.keanequibilan.ext.testImplementations
 
 plugins {
     id("com.android.application")
@@ -53,13 +56,13 @@ android {
 dependencies {
     // local libs
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementModules(AppDependencies.appModules)
+    implementModules(AppDependencies.modules())
 
     // app libs
-    implementations(AppDependencies.appLibraries)
-    kapts(AppDependencies.appAnnotations)
+    implementations(AppDependencies.libraries())
+    kapts(AppDependencies.annotations())
 
     // test libs
-    testImplementations(AppDependencies.testLibraries)
-    androidTestImplementations(AppDependencies.androidTestLibraries)
+    testImplementations(TestDependencies.test())
+    androidTestImplementations(TestDependencies.androidTest())
 }
