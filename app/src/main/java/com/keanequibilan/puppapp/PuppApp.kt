@@ -1,6 +1,7 @@
 package com.keanequibilan.puppapp
 
 import android.app.Application
+import com.keanequibilan.database.DATABASE_MODULE
 import com.keanequibilan.puppapp.di.APP_MODULE
 import com.keanequibilan.puppapp.network.NETWORK_MODULE
 import com.keanequibilan.puppapp.repository.REPOSITORY_MODULE
@@ -12,6 +13,7 @@ class PuppApp : Application() {
 
     private val appModules = listOf(
         APP_MODULE,
+        DATABASE_MODULE,
         NETWORK_MODULE,
         REPOSITORY_MODULE
     )

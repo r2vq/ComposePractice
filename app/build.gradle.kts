@@ -1,11 +1,13 @@
 import AppDependencies.androidTestImplementations
 import AppDependencies.implementModules
 import AppDependencies.implementations
+import AppDependencies.kapts
 import AppDependencies.testImplementations
 
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -55,6 +57,7 @@ dependencies {
 
     // app libs
     implementations(AppDependencies.appLibraries)
+    kapts(AppDependencies.appAnnotations)
 
     // test libs
     testImplementations(AppDependencies.testLibraries)

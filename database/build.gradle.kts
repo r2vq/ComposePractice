@@ -45,11 +45,11 @@ android {
 dependencies {
     // local libs
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementModules(AppDependencies.networkModules)
+    implementModules(AppDependencies.databaseModules)
 
     // app libs
-    implementations(AppDependencies.networkLibraries)
-    kapts(AppDependencies.networkAnnotations)
+    implementations(AppDependencies.databaseLibraries)
+    kapts(AppDependencies.databaseAnnotations)
 
     // test libs
     testImplementations(AppDependencies.testLibraries)

@@ -17,6 +17,7 @@ object Versions {
     const val lifecycle = "2.3.0"
     const val material = "1.3.0"
     const val retrofit = "2.9.0"
+    const val room = "2.2.6"
 
     // test
     const val junit = "4.13.2"

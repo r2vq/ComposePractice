@@ -6,6 +6,7 @@ import org.gradle.kotlin.dsl.project
  */
 object AppDependencies {
     // modules
+    private const val database = ":database"
     private const val network = ":network"
     private const val repository = ":repository"
 
@@ -27,6 +28,11 @@ object AppDependencies {
     private const val material = "com.google.android.material:material:${Versions.material}"
     private const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
 
+    // database
+    private const val room = "androidx.room:room-runtime:${Versions.room}"
+    private const val roomAnnotations = "androidx.room:room-compiler:${Versions.room}"
+    private const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+
     // dependency injection
     private const val koin = "org.koin:koin-android-viewmodel:${Versions.koin}"
 
@@ -42,6 +48,9 @@ object AppDependencies {
     private const val extJunit = "androidx.test.ext:junit:${Versions.extJunit}"
     private const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
+    val appAnnotations = listOf<String>(
+
+    )
     val appLibraries = listOf(
         appcompat,
         composeActivity,
@@ -57,12 +66,30 @@ object AppDependencies {
         lifecycle,
         material
     )
-
     val appModules = listOf(
+        database,
         network,
         repository
     )
 
+    val databaseAnnotations = listOf(
+        roomAnnotations
+    )
+    val databaseLibraries = listOf(
+        appcompat,
+        coreKtx,
+        koin,
+        kotlinStdLib,
+        room,
+        roomKtx
+    )
+    val databaseModules = listOf<String>(
+
+    )
+
+    val networkAnnotations = listOf<String>(
+
+    )
     val networkLibraries = listOf(
         appcompat,
         coreKtx,
@@ -71,18 +98,19 @@ object AppDependencies {
         moshiConverter,
         retrofit
     )
-
     val networkModules = listOf<String>(
 
     )
 
+    val repositoryAnnotations = listOf<String>(
+
+    )
     val repositoryLibraries = listOf(
         appcompat,
         coreKtx,
         koin,
         kotlinStdLib
     )
-
     val repositoryModules = listOf(
         network
     )
@@ -91,12 +119,10 @@ object AppDependencies {
         extJunit,
         espressoCore
     )
-
     val testLibraries = listOf(
         junit
     )
 
-    @Suppress("unused")
     fun DependencyHandler.kapts(kapt: List<String>) {
         kapt.forEach { dependency -> add("kapt", dependency) }
     }
