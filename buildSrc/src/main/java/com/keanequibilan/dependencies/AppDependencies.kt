@@ -6,6 +6,7 @@ object AppDependencies : Dependencies {
         composeActivity,
         composeMaterial,
         composeNavigation,
+        composePaging,
         composeRuntime,
         composeUi,
         composeUiTooling,

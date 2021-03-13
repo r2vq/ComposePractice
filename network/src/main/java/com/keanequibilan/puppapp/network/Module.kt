@@ -27,7 +27,7 @@ val NETWORK_MODULE: Module = module {
             .create(JikanService::class.java)
     }
 
-    single {
+    single<PokemonService> {
         Retrofit.Builder()
             .baseUrl("https://pokeapi.co/")
             .addConverterFactory(get())

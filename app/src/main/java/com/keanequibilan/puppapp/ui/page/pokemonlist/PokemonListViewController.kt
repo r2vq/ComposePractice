@@ -4,8 +4,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import com.keanequibilan.puppapp.ui.component.PokemonListItemComponent
 import com.keanequibilan.puppapp.ui.model.PokemonListItem
 
@@ -16,18 +17,16 @@ class PokemonListViewController(
     fun Compose() {
         Surface(color = MaterialTheme.colors.background) {
             MaterialTheme {
-                PokemonList(viewModel.items.observeAsState(emptyList()))
+                PokemonList(viewModel.pokedexItems.collectAsLazyPagingItems())
             }
         }
     }
 
     @Composable
-    private fun PokemonList(pokemonList: State<List<PokemonListItem>>) {
+    private fun PokemonList(pokemonList: LazyPagingItems<PokemonListItem>) {
         LazyColumn {
-            items(
-                count = pokemonList.value.size
-            ) { index ->
-                PokemonListItemComponent(pokemonList.value[index]).Compose()
+            items(pokemonList) { item ->
+                item?.let { PokemonListItemComponent(it).Compose() }
             }
         }
     }

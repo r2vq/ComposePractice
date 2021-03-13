@@ -1,9 +1,10 @@
 package com.keanequibilan.puppapp.repository
 
-import com.keanequibilan.puppapp.repository.model.PokedexItem
+import com.keanequibilan.puppapp.repository.impl.PokedexPage
 
-interface PokemonRepository {
+internal interface PokemonRepository {
     suspend fun getPokedex(
-        offset: Int = 0
-    ): List<PokedexItem>
+        offset: Int = 0,
+        limit: Int = 20
+    ): PokedexPage
 }
