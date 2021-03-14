@@ -1,8 +1,8 @@
-package com.keanequibilan.puppapp.ui.model
+package com.keanequibilan.puppapp.repository.model
 
 import android.net.Uri
 
-data class PokemonListItem(
+data class LocalPokemon(
     val id: Int,
     val name: String,
     val spriteFront: Uri

@@ -21,7 +21,8 @@ val APP_MODULE = module {
 
     viewModel {
         PokemonListViewModel(
-            pager = get()
+            pager = get(),
+            repository = get()
         )
     }
 

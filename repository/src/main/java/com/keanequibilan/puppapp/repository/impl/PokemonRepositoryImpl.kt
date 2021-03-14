@@ -3,9 +3,10 @@ package com.keanequibilan.puppapp.repository.impl
 import androidx.core.net.toUri
 import com.keanequibilan.puppapp.network.PokemonService
 import com.keanequibilan.puppapp.repository.PokemonRepository
+import com.keanequibilan.puppapp.repository.model.LocalPokemon
 import com.keanequibilan.puppapp.repository.model.PokedexItem
 
-class PokemonRepositoryImpl(
+internal class PokemonRepositoryImpl(
     val api: PokemonService
 ) : PokemonRepository {
     override suspend fun getPokedex(
@@ -30,6 +31,18 @@ class PokemonRepositoryImpl(
                             name = name
                         )
                     }
+            )
+        }
+
+    override suspend fun getPokemon(
+        id: Int
+    ): LocalPokemon = api
+        .getPokemon(id)
+        .run {
+            LocalPokemon(
+                id = id,
+                name = name,
+                spriteFront = sprites.front_default.toUri()
             )
         }
 }

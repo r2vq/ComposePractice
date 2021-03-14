@@ -21,5 +21,10 @@ data class PokedexEntry(
 
 data class PokemonResponse(
     val id: Int,
-    val name: String
+    val name: String,
+    val sprites: SpritesResponse
+)
+
+data class SpritesResponse(
+    val front_default: String
 )
