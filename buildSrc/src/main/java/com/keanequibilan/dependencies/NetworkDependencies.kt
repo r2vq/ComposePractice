@@ -6,7 +6,12 @@ object NetworkDependencies : Dependencies {
         coreKtx,
         koin,
         kotlinStdLib,
+        moshi,
         moshiConverter,
         retrofit
+    )
+
+    override fun annotations(): List<String> = listOf(
+        moshiCodeGen
     )
 }

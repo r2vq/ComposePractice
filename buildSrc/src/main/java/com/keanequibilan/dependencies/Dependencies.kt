@@ -51,6 +51,8 @@ const val koin = "org.koin:koin-android-viewmodel:${Versions.koin}"
 const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
 
 // network
+const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+const val moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
 const val moshiConverter =
     "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
 const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"

@@ -38,7 +38,7 @@ class PokemonListItemComponent(private val item: PokemonListItem) {
                         .padding(8.dp)
                         .fillMaxWidth()
                 )
-                PokemonImage(url = item.spriteFront.toString())
+                PokemonImage(url = item.officialArtwork.toString())
             }
         }
     }

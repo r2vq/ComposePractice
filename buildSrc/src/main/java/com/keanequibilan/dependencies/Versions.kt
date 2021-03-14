@@ -19,6 +19,7 @@ object Versions {
     const val koin = "2.2.2"
     const val lifecycle = "2.3.0"
     const val material = "1.3.0"
+    const val moshi = "1.11.0"
     const val retrofit = "2.9.0"
     const val room = "2.2.6"
 

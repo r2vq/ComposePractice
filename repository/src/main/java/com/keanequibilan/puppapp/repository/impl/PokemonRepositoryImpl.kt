@@ -42,7 +42,8 @@ internal class PokemonRepositoryImpl(
             LocalPokemon(
                 id = id,
                 name = name,
-                spriteFront = sprites.front_default.toUri()
+                spriteFront = sprites.frontDefault.toUri(),
+                officialArtwork = sprites.other.officialArtwork.frontDefault.toUri()
             )
         }
 }

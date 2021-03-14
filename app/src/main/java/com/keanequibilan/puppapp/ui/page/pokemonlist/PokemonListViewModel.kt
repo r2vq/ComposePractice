@@ -27,7 +27,8 @@ class PokemonListViewModel(
                     PokemonListItem(
                         id = item.id,
                         name = item.name,
-                        spriteFront = item.spriteFront
+                        spriteFront = item.spriteFront,
+                        officialArtwork = item.officialArtwork
                     )
                 }
         }
