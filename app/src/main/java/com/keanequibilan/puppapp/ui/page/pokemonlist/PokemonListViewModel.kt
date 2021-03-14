@@ -9,8 +9,11 @@ import androidx.paging.map
 import com.keanequibilan.puppapp.repository.PokemonRepository
 import com.keanequibilan.puppapp.repository.model.PokedexItem
 import com.keanequibilan.puppapp.ui.model.PokemonListItem
+import com.keanequibilan.puppapp.ui.model.PokemonType
+import com.keanequibilan.puppapp.ui.theme.PokemonTypeColour
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.util.*
 
 class PokemonListViewModel(
     pager: Pager<Int, PokedexItem>,
@@ -26,9 +29,37 @@ class PokemonListViewModel(
                 .map { item ->
                     PokemonListItem(
                         id = item.id,
-                        name = item.name,
+                        name = item.name.capitalize(Locale.ROOT),
                         spriteFront = item.spriteFront,
-                        officialArtwork = item.officialArtwork
+                        officialArtwork = item.officialArtwork,
+                        types = item.types.map {
+                            PokemonType(
+                                name = it.name.capitalize(Locale.ROOT)
+                            )
+                        },
+                        typeColour = when (item.types.firstOrNull()?.name) {
+                            "normal" -> PokemonTypeColour.Normal
+                            "fighting" -> PokemonTypeColour.Fighting
+                            "flying" -> PokemonTypeColour.Flying
+                            "poison" -> PokemonTypeColour.Poison
+                            "ground" -> PokemonTypeColour.Ground
+                            "rock" -> PokemonTypeColour.Rock
+                            "bug" -> PokemonTypeColour.Bug
+                            "ghost" -> PokemonTypeColour.Ghost
+                            "steel" -> PokemonTypeColour.Steel
+                            "fire" -> PokemonTypeColour.Fire
+                            "water" -> PokemonTypeColour.Water
+                            "grass" -> PokemonTypeColour.Grass
+                            "electric" -> PokemonTypeColour.Electric
+                            "psychic" -> PokemonTypeColour.Psychic
+                            "ice" -> PokemonTypeColour.Ice
+                            "dragon" -> PokemonTypeColour.Dragon
+                            "dark" -> PokemonTypeColour.Dark
+                            "fairy" -> PokemonTypeColour.Fairy
+                            "unknown" -> PokemonTypeColour.Unknown
+                            "shadow" -> PokemonTypeColour.Shadow
+                            else -> PokemonTypeColour.Unknown
+                        }
                     )
                 }
         }

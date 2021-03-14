@@ -4,6 +4,7 @@ import androidx.core.net.toUri
 import com.keanequibilan.puppapp.network.PokemonService
 import com.keanequibilan.puppapp.repository.PokemonRepository
 import com.keanequibilan.puppapp.repository.model.LocalPokemon
+import com.keanequibilan.puppapp.repository.model.LocalType
 import com.keanequibilan.puppapp.repository.model.PokedexItem
 
 internal class PokemonRepositoryImpl(
@@ -43,7 +44,8 @@ internal class PokemonRepositoryImpl(
                 id = id,
                 name = name,
                 spriteFront = sprites.frontDefault.toUri(),
-                officialArtwork = sprites.other.officialArtwork.frontDefault.toUri()
+                officialArtwork = sprites.other.officialArtwork.frontDefault.toUri(),
+                types = types.map { LocalType(it.type.name) }
             )
         }
 }
