@@ -1,5 +1,6 @@
 package com.keanequibilan.puppapp.ui.component
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,122 +35,181 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.keanequibilan.puppapp.R
 import com.keanequibilan.puppapp.ui.model.PokemonListItem
+import com.keanequibilan.puppapp.ui.model.PokemonType
 import com.keanequibilan.puppapp.ui.util.loadPicture
 
-class PokemonListItemComponent(private val item: PokemonListItem) {
-    @Composable
-    fun Compose() {
-        Card(
-            shape = RoundedCornerShape(25.dp),
+@Composable
+fun PokemonListItemComponent(
+    item: PokemonListItem
+) {
+    Card(
+        shape = RoundedCornerShape(25.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .requiredHeight(250.dp)
+            .padding(8.dp)
+    ) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .requiredHeight(250.dp)
-                .padding(8.dp)
+                .background(item.typeColour.normal)
         ) {
-            Column(
-                modifier = Modifier
-                    .background(item.typeColour.normal)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        text = "#${item.id.toString().padStart(3, '0')}",
-                        color = item.typeColour.dark,
-                        textAlign = TextAlign.End,
-                        fontWeight = FontWeight.ExtraBold,
-                        style = MaterialTheme.typography.h2,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                end = 16.dp
-                            )
-                            .alpha(0.3f)
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .padding(
-                            start = 32.dp
-                        )
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        text = item.name,
-                        color = Color.White,
-                        style = MaterialTheme.typography.h2,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                    )
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .padding(
-                                start = 32.dp,
-                                top = 16.dp
-                            )
-                    ) {
-                        item
-                            .types
-                            .map { type -> type.name }
-                            .forEach { typeName ->
-                                Card(
-                                    modifier = Modifier
-                                        .widthIn(
-                                            min = 100.dp
-                                        ),
-                                    shape = RoundedCornerShape(20.dp)
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .background(item.typeColour.light)
-                                            .padding(10.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(
-                                            text = typeName,
-                                            color = Color.White
-                                        )
-                                    }
-                                }
-                                Spacer(
-                                    modifier = Modifier
-                                        .height(4.dp)
-                                )
-                            }
-                    }
-                    Box(
-                        modifier = Modifier
-                            .width(100.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_pokeball),
-                            contentDescription = null,
-                            colorFilter = ColorFilter.tint(item.typeColour.light),
-                            modifier = Modifier
-                                .requiredWidth(200.dp)
-                                .fillMaxSize(),
-                            contentScale = ContentScale.Crop,
-                            alignment = Alignment.TopStart
-                        )
-                        PokemonImage(
-                            url = item.officialArtwork.toString(),
-                        )
-                    }
-                }
-            }
+            PokemonNumberBox(
+                number = item.id,
+                colour = item.typeColour.dark
+            )
+            PokemonNameBox(
+                name = item.name
+            )
+            PokemonDetailsRow(
+                colour = item.typeColour.light,
+                artUrl = item.officialArtwork,
+                types = item.types
+            )
         }
     }
+}
 
-    @Composable
-    fun PokemonImage(url: String) {
-        loadPicture(url = url)
+@Composable
+fun PokemonNumberBox(
+    number: Int,
+    colour: Color
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = "#${number.toString().padStart(3, '0')}",
+            color = colour,
+            textAlign = TextAlign.End,
+            fontWeight = FontWeight.ExtraBold,
+            style = MaterialTheme.typography.h2,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    end = 16.dp
+                )
+                .alpha(0.3f)
+        )
+    }
+}
+
+@Composable
+fun PokemonNameBox(
+    name: String
+) {
+    Box(
+        modifier = Modifier
+            .padding(
+                start = 32.dp
+            )
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = name,
+            color = Color.White,
+            style = MaterialTheme.typography.h2,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+fun PokemonDetailsRow(
+    colour: Color,
+    artUrl: Uri,
+    types: List<PokemonType>
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        TypeChipColumn(
+            types = types,
+            colour = colour
+        )
+        PokemonImage(
+            colour = colour,
+            url = artUrl
+        )
+    }
+}
+
+@Composable
+fun TypeChipColumn(
+    types: List<PokemonType>,
+    colour: Color
+) {
+    Column(
+        modifier = Modifier
+            .padding(
+                start = 32.dp,
+                top = 16.dp
+            )
+    ) {
+        types
+            .map { type -> type.name }
+            .forEach { typeName ->
+                TypeChip(
+                    colour = colour,
+                    name = typeName
+                )
+            }
+    }
+}
+
+@Composable
+fun TypeChip(
+    colour: Color,
+    name: String
+) {
+    Card(
+        modifier = Modifier
+            .widthIn(
+                min = 100.dp
+            ),
+        shape = RoundedCornerShape(20.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .background(colour)
+                .padding(10.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = name,
+                color = Color.White
+            )
+        }
+    }
+    Spacer(
+        modifier = Modifier
+            .height(4.dp)
+    )
+}
+
+@Composable
+fun PokemonImage(
+    colour: Color,
+    url: Uri
+) {
+    Box(
+        modifier = Modifier
+            .width(100.dp)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_pokeball),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(colour),
+            modifier = Modifier
+                .requiredWidth(200.dp)
+                .fillMaxSize(),
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.TopStart
+        )
+        loadPicture(url = url.toString())
             .value
             ?.asImageBitmap()
             ?.let { bitmap ->

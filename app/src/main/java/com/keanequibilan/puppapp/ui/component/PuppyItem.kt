@@ -14,32 +14,28 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.keanequibilan.puppapp.ui.util.loadPicture
 
-class PuppyItem(
-    private val url: String
-) {
-    @Composable
-    fun Compose() {
-        Column {
-            DogImage(url = url)
-            Spacer(modifier = Modifier.height(4.dp))
-        }
+@Composable
+fun PuppyItem(url: String) {
+    Column {
+        DogImage(url = url)
+        Spacer(modifier = Modifier.height(4.dp))
     }
+}
 
-    @Composable
-    fun DogImage(url: String) {
-        loadPicture(url = url)
-            .value
-            ?.asImageBitmap()
-            ?.let { bitmap ->
-                Image(
-                    bitmap = bitmap,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight()
-                        .padding(4.dp),
-                    contentScale = ContentScale.FillWidth
-                )
-            }
-    }
+@Composable
+fun DogImage(url: String) {
+    loadPicture(url = url)
+        .value
+        ?.asImageBitmap()
+        ?.let { bitmap ->
+            Image(
+                bitmap = bitmap,
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(4.dp),
+                contentScale = ContentScale.FillWidth
+            )
+        }
 }

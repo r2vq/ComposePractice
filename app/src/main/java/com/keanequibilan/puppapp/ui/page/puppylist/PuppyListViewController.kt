@@ -8,27 +8,26 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
 import com.keanequibilan.puppapp.ui.component.PuppyItem
 
-class PuppyListViewController(
-    private val viewModel: PuppyListViewModel
+@Composable
+fun PuppyListViewController(
+    viewModel: PuppyListViewModel
 ) {
-
-    @Composable
-    fun Compose() {
-        Surface(color = MaterialTheme.colors.background) {
-            MaterialTheme {
-                PuppyList(viewModel.items.observeAsState(emptyList()))
-            }
+    Surface(color = MaterialTheme.colors.background) {
+        MaterialTheme {
+            PuppyList(viewModel.items.observeAsState(emptyList()))
         }
     }
+}
 
-    @Composable
-    private fun PuppyList(puppies: State<List<String>>) {
-        LazyColumn {
-            items(
-                count = puppies.value.size
-            ) { index ->
-                PuppyItem(puppies.value[index]).Compose()
-            }
+@Composable
+fun PuppyList(
+    puppies: State<List<String>>
+) {
+    LazyColumn {
+        items(
+            count = puppies.value.size
+        ) { index ->
+            PuppyItem(puppies.value[index])
         }
     }
 }

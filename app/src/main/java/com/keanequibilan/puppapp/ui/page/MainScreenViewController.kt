@@ -11,40 +11,45 @@ import androidx.navigation.compose.rememberNavController
 import com.keanequibilan.puppapp.ui.component.BottomNav
 import com.keanequibilan.puppapp.ui.navigation.BottomNavigationItems
 import com.keanequibilan.puppapp.ui.navigation.MainNavigationConfiguration
+import com.keanequibilan.puppapp.ui.page.animelist.AnimeListViewModel
+import com.keanequibilan.puppapp.ui.page.pokemonlist.PokemonListViewModel
+import com.keanequibilan.puppapp.ui.page.puppylist.PuppyListViewModel
 
 /**
  * Implementation for this taken from:
  * https://proandroiddev.com/implement-bottom-bar-navigation-in-jetpack-compose-b530b1cd9ee2
  */
-class MainScreenViewController(
-    private val bottomNav: BottomNav,
-    private val mainScreenNavigationConfiguration: MainNavigationConfiguration
+@Composable
+fun MainScreenViewController(
+    puppyListViewModel: PuppyListViewModel,
+    animeListViewModel: AnimeListViewModel,
+    pokemonListViewModel: PokemonListViewModel
 ) {
-    @Composable
-    fun Compose() {
-        val navController = rememberNavController()
+    val navController = rememberNavController()
 
-        val navItems = remember {
-            listOf(
-                BottomNavigationItems.Puppies,
-                BottomNavigationItems.Anime,
-                BottomNavigationItems.Pokemon
+    val navItems = remember {
+        listOf(
+            BottomNavigationItems.Puppies,
+            BottomNavigationItems.Anime,
+            BottomNavigationItems.Pokemon
+        )
+    }
+
+    Scaffold(
+        bottomBar = {
+            BottomNav(
+                navController = navController,
+                items = navItems
             )
         }
-
-        Scaffold(
-            bottomBar = {
-                bottomNav.Compose(
-                    navController = navController,
-                    items = navItems
-                )
-            }
-        ) {
-            Box(modifier = Modifier.padding(bottom = 58.dp)) {
-                mainScreenNavigationConfiguration.Compose(
-                    navController = navController
-                )
-            }
+    ) {
+        Box(modifier = Modifier.padding(bottom = 58.dp)) {
+            MainNavigationConfiguration(
+                navController = navController,
+                puppyListViewModel = puppyListViewModel,
+                animeListViewModel = animeListViewModel,
+                pokemonListViewModel = pokemonListViewModel
+            )
         }
     }
 }

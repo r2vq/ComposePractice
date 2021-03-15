@@ -9,26 +9,24 @@ import androidx.compose.runtime.livedata.observeAsState
 import com.keanequibilan.puppapp.ui.component.AnimeItem
 import com.keanequibilan.puppapp.ui.model.Anime
 
-class AnimeListViewController(
-    private val viewModel: AnimeListViewModel
+@Composable
+fun AnimeListViewController(
+    viewModel: AnimeListViewModel
 ) {
-    @Composable
-    fun Compose() {
-        Surface(color = MaterialTheme.colors.background) {
-            MaterialTheme {
-                AnimeList(viewModel.items.observeAsState(emptyList()))
-            }
+    Surface(color = MaterialTheme.colors.background) {
+        MaterialTheme {
+            AnimeList(viewModel.items.observeAsState(emptyList()))
         }
     }
+}
 
-    @Composable
-    private fun AnimeList(anime: State<List<Anime>>) {
-        LazyColumn {
-            items(
-                count = anime.value.size
-            ) { index ->
-                AnimeItem(anime.value[index]).Compose()
-            }
+@Composable
+fun AnimeList(anime: State<List<Anime>>) {
+    LazyColumn {
+        items(
+            count = anime.value.size
+        ) { index ->
+            AnimeItem(anime.value[index])
         }
     }
 }

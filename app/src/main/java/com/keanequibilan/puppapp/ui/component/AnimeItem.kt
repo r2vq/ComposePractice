@@ -23,72 +23,70 @@ import androidx.compose.ui.unit.dp
 import com.keanequibilan.puppapp.ui.model.Anime
 import com.keanequibilan.puppapp.ui.util.loadPicture
 
-class AnimeItem(
-    private val anime: Anime
-) {
-    @Composable
-    fun Compose() = with(anime) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .requiredHeightIn(
-                    min = 50.dp
+@Composable
+fun AnimeItem(
+    anime: Anime
+) = with(anime) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .requiredHeightIn(
+                min = 50.dp
+            )
+            .shadow(4.dp)
+    ) {
+        Column {
+            TypeBar(
+                colour = colour
+            )
+            Row {
+                AnimeThumbnail(
+                    image = image
                 )
-                .shadow(4.dp)
-        ) {
-            Column {
-                TypeBar(
-                    colour = colour
+                AnimeText(
+                    title = title
                 )
-                Row {
-                    AnimeThumbnail(
-                        image = image
-                    )
-                    AnimeText(
-                        title = title
-                    )
-                }
             }
         }
     }
+}
 
-    @Composable
-    fun TypeBar(colour: Color) {
-        Box(
-            modifier = Modifier
-                .background(
-                    color = colour
-                )
-                .fillMaxWidth()
-                .height(20.dp)
-        )
-    }
+@Composable
+fun TypeBar(colour: Color) {
+    Box(
+        modifier = Modifier
+            .background(
+                color = colour
+            )
+            .fillMaxWidth()
+            .height(20.dp)
+    )
+}
 
-    @Composable
-    fun AnimeText(title: String) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier
-                .padding(16.dp)
-        )
-    }
+@Composable
+fun AnimeText(title: String) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.body1,
+        modifier = Modifier
+            .padding(16.dp)
+    )
+}
 
-    @Composable
-    fun AnimeThumbnail(image: String) {
-        loadPicture(url = image)
-            .value
-            ?.asImageBitmap()
-            ?.let { bitmap ->
-                Image(
-                    bitmap = bitmap,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp),
-                    contentScale = ContentScale.Crop
-                )
-            }
-    }
+@Composable
+fun AnimeThumbnail(image: String) {
+    loadPicture(url = image)
+        .value
+        ?.asImageBitmap()
+        ?.let { bitmap ->
+            Image(
+                bitmap = bitmap,
+                contentDescription = null,
+                modifier = Modifier
+                    .width(100.dp)
+                    .height(100.dp),
+                contentScale = ContentScale.Crop
+            )
+        }
 }

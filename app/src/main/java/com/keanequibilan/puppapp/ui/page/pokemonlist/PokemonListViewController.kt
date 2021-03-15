@@ -10,24 +10,22 @@ import androidx.paging.compose.items
 import com.keanequibilan.puppapp.ui.component.PokemonListItemComponent
 import com.keanequibilan.puppapp.ui.model.PokemonListItem
 
-class PokemonListViewController(
-    private val viewModel: PokemonListViewModel
+@Composable
+fun PokemonListViewScreen(
+    viewModel: PokemonListViewModel
 ) {
-    @Composable
-    fun Compose() {
-        Surface(color = MaterialTheme.colors.background) {
-            MaterialTheme {
-                PokemonList(viewModel.pokedexItems.collectAsLazyPagingItems())
-            }
+    Surface(color = MaterialTheme.colors.background) {
+        MaterialTheme {
+            PokemonList(viewModel.pokedexItems.collectAsLazyPagingItems())
         }
     }
+}
 
-    @Composable
-    private fun PokemonList(pokemonList: LazyPagingItems<PokemonListItem>) {
-        LazyColumn {
-            items(pokemonList) { item ->
-                item?.let { PokemonListItemComponent(it).Compose() }
-            }
+@Composable
+private fun PokemonList(pokemonList: LazyPagingItems<PokemonListItem>) {
+    LazyColumn {
+        items(pokemonList) { item ->
+            item?.let { PokemonListItemComponent(it) }
         }
     }
 }
