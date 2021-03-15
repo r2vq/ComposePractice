@@ -34,13 +34,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.keanequibilan.puppapp.R
-import com.keanequibilan.puppapp.ui.model.PokemonListItem
+import com.keanequibilan.puppapp.ui.model.PokemonPokedexItem
 import com.keanequibilan.puppapp.ui.model.PokemonType
 import com.keanequibilan.puppapp.ui.util.loadPicture
 
 @Composable
-fun PokemonListItemComponent(
-    item: PokemonListItem
+fun PokemonPokedexComponent(
+    item: PokemonPokedexItem
 ) {
     Card(
         shape = RoundedCornerShape(25.dp),
