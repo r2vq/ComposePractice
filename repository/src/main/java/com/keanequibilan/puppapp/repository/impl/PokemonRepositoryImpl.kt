@@ -1,6 +1,9 @@
 package com.keanequibilan.puppapp.repository.impl
 
 import androidx.core.net.toUri
+import com.keanequibilan.database.DatabaseClient
+import com.keanequibilan.database.model.StoredPokedexItem
+import com.keanequibilan.database.model.StoredPokedexPage
 import com.keanequibilan.puppapp.network.PokemonService
 import com.keanequibilan.puppapp.repository.PokemonRepository
 import com.keanequibilan.puppapp.repository.model.LocalPokemon
@@ -8,32 +11,52 @@ import com.keanequibilan.puppapp.repository.model.LocalType
 import com.keanequibilan.puppapp.repository.model.PokedexItem
 
 internal class PokemonRepositoryImpl(
-    val api: PokemonService
+    private val api: PokemonService,
+    private val db: DatabaseClient
 ) : PokemonRepository {
+
     override suspend fun getPokedex(
         offset: Int,
         limit: Int
-    ): PokedexPage = api
-        .getPokedex(offset, limit)
-        .run {
+    ): PokedexPage = getStoredPokedexPage(offset, limit)
+        .let { localPage ->
             PokedexPage(
-                next = next?.getOffset(),
-                previous = previous?.getOffset(),
-                items = results
-                    .mapNotNull { entry ->
-                        entry
-                            .url
-                            .getId()
-                            ?.let { id -> entry.name to id }
-                    }
-                    .map { (name, id) ->
-                        PokedexItem(
-                            id = id,
-                            name = name
-                        )
-                    }
+                next = localPage.next,
+                previous = localPage.previous,
+                items = localPage.items.map { item ->
+                    PokedexItem(
+                        id = item.id,
+                        name = item.name
+                    )
+                }
             )
         }
+
+    private suspend fun getStoredPokedexPage(
+        offset: Int,
+        limit: Int
+    ) = db.getStoredPokedexPage(offset, limit)
+        ?: api
+            .getPokedex(offset, limit)
+            .run {
+                StoredPokedexPage(
+                    offset = offset,
+                    limit = limit,
+                    next = next?.getOffset(),
+                    previous = previous?.getOffset(),
+                    items = results
+                        .mapNotNull { entry ->
+                            entry.url.getId()
+                                ?.let { id ->
+                                    StoredPokedexItem(
+                                        id = id,
+                                        name = entry.name
+                                    )
+                                }
+                        }
+                )
+            }
+            .also { page -> db.insertStoredPokedexPage(page) }
 
     override suspend fun getPokemon(
         id: Int

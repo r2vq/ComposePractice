@@ -13,6 +13,12 @@ internal interface PokedexDao {
     @Query("SELECT * FROM PokedexItem WHERE id = :id")
     suspend fun get(id: Int): PokedexItem
 
+    @Query("SELECT * FROM PokedexItem WHERE id > :offset AND id <= :offset + :limit")
+    suspend fun getPage(
+        offset: Int,
+        limit: Int
+    ): List<PokedexItem>
+
     @Insert
     suspend fun insertAll(vararg items: PokedexItem)
 }

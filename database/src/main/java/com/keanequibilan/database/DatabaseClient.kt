@@ -1,11 +1,15 @@
 package com.keanequibilan.database
 
-import com.keanequibilan.database.entity.PokedexItem
+import com.keanequibilan.database.model.StoredPokedexPage
 
 interface DatabaseClient {
-    suspend fun getPokedexEntries(): List<PokedexItem>
 
-    suspend fun getPokedexEntry(id: Int): PokedexItem
+    suspend fun getStoredPokedexPage(
+        offset: Int,
+        limit: Int
+    ): StoredPokedexPage?
 
-    suspend fun addAllPokedexEntries(vararg items: PokedexItem)
+    suspend fun insertStoredPokedexPage(
+        page: StoredPokedexPage
+    )
 }

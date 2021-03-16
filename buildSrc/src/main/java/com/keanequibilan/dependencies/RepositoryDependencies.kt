@@ -10,6 +10,7 @@ object RepositoryDependencies : Dependencies {
     )
 
     override fun modules() = listOf(
+        database,
         network
     )
 
