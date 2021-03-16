@@ -2,6 +2,7 @@ package com.keanequibilan.puppapp.repository.impl
 
 import androidx.core.net.toUri
 import com.keanequibilan.database.DatabaseClient
+import com.keanequibilan.database.model.StoredPokedexDetails
 import com.keanequibilan.database.model.StoredPokedexItem
 import com.keanequibilan.database.model.StoredPokedexPage
 import com.keanequibilan.puppapp.network.PokemonService
@@ -32,6 +33,19 @@ internal class PokemonRepositoryImpl(
             )
         }
 
+    override suspend fun getPokemon(
+        id: Int
+    ): LocalPokemon = getStoredPokedexDetails(id)
+        .let { storedPokemon ->
+            LocalPokemon(
+                id = id,
+                name = storedPokemon.name,
+                spriteFront = storedPokemon.spriteFront.toUri(),
+                officialArtwork = storedPokemon.officialArtwork.toUri(),
+                types = storedPokemon.types.map { name -> LocalType(name) }
+            )
+        }
+
     private suspend fun getStoredPokedexPage(
         offset: Int,
         limit: Int
@@ -58,19 +72,21 @@ internal class PokemonRepositoryImpl(
             }
             .also { page -> db.insertStoredPokedexPage(page) }
 
-    override suspend fun getPokemon(
+    private suspend fun getStoredPokedexDetails(
         id: Int
-    ): LocalPokemon = api
-        .getPokemon(id)
-        .run {
-            LocalPokemon(
-                id = id,
-                name = name,
-                spriteFront = sprites.frontDefault.toUri(),
-                officialArtwork = sprites.other.officialArtwork.frontDefault.toUri(),
-                types = types.map { LocalType(it.type.name) }
-            )
-        }
+    ) = db.getStoredPokedexDetails(id)
+        ?: api
+            .getPokemon(id)
+            .run {
+                StoredPokedexDetails(
+                    id = id,
+                    name = name,
+                    spriteFront = sprites.frontDefault,
+                    officialArtwork = sprites.other.officialArtwork.frontDefault,
+                    types = types.map { it.type.name }
+                )
+            }
+            .also { pokemon -> db.insertPokedexDetails(pokemon) }
 }
 
 data class PokedexPage(
