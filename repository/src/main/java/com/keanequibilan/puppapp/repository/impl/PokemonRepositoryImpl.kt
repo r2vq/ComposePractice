@@ -41,7 +41,7 @@ internal class PokemonRepositoryImpl(
                 id = id,
                 name = storedPokemon.name,
                 spriteFront = storedPokemon.spriteFront.toUri(),
-                officialArtwork = storedPokemon.officialArtwork.toUri(),
+                officialArtwork = storedPokemon.officialArtwork?.toUri(),
                 types = storedPokemon.types.map { name -> LocalType(name) }
             )
         }
@@ -81,7 +81,7 @@ internal class PokemonRepositoryImpl(
                 StoredPokedexDetails(
                     id = id,
                     name = name,
-                    spriteFront = sprites.frontDefault,
+                    spriteFront = sprites.frontDefault ?: "",
                     officialArtwork = sprites.other.officialArtwork.frontDefault,
                     types = types.map { it.type.name }
                 )

@@ -6,7 +6,7 @@ data class LocalPokemon(
     val id: Int,
     val name: String,
     val spriteFront: Uri,
-    val officialArtwork: Uri,
+    val officialArtwork: Uri?,
     val types: List<LocalType>
 )
 

@@ -35,7 +35,7 @@ data class PokemonResponse(
 @JsonClass(generateAdapter = true)
 data class SpritesResponse(
     @Json(name = "front_default")
-    val frontDefault: String,
+    val frontDefault: String?,
     @Json(name = "other")
     val other: OtherSpritesResponse
 )
@@ -49,7 +49,7 @@ data class OtherSpritesResponse(
 @JsonClass(generateAdapter = true)
 data class OfficialArtworkResponse(
     @Json(name = "front_default")
-    val frontDefault: String
+    val frontDefault: String?
 )
 
 @JsonClass(generateAdapter = true)

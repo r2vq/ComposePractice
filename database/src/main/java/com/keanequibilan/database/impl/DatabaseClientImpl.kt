@@ -22,7 +22,7 @@ internal class DatabaseClientImpl(
         .getPage(offset, limit)
         ?.let { page ->
             db.pokedexDao()
-                .getPage(offset, limit)
+                .getPage(offset, page.next ?: Int.MAX_VALUE)
                 .run {
                     StoredPokedexPage(
                         offset = page.offset,

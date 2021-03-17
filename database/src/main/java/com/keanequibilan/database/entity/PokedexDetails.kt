@@ -8,6 +8,6 @@ data class PokedexDetails(
     @PrimaryKey val id: Int,
     val name: String,
     val spriteFront: String,
-    val officialArtwork: String,
+    val officialArtwork: String?,
     val types: String
 )

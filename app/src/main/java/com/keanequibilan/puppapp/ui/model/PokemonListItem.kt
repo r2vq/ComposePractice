@@ -13,7 +13,7 @@ data class PokemonPokedexItem(
     val id: Int,
     val name: String,
     val spriteFront: Uri,
-    val officialArtwork: Uri,
+    val officialArtwork: Uri?,
     val types: List<PokemonType>,
     val typeColour: PokemonTypeColour
 ) : PokedexListItem()

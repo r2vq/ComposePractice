@@ -118,7 +118,7 @@ fun PokemonNameBox(
 @Composable
 fun PokemonDetailsRow(
     colour: Color,
-    artUrl: Uri,
+    artUrl: Uri?,
     types: List<PokemonType>
 ) {
     Row(
@@ -193,7 +193,7 @@ fun TypeChip(
 @Composable
 fun PokemonImage(
     colour: Color,
-    url: Uri
+    url: Uri?
 ) {
     Box(
         modifier = Modifier
@@ -209,8 +209,10 @@ fun PokemonImage(
             contentScale = ContentScale.Crop,
             alignment = Alignment.TopStart
         )
-        loadPicture(url = url.toString())
-            .value
+        url
+            ?.toString()
+            ?.let { loadPicture(url = it) }
+            ?.value
             ?.asImageBitmap()
             ?.let { bitmap ->
                 Image(
