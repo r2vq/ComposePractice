@@ -15,7 +15,8 @@ object AppDependencies : Dependencies {
         koin,
         kotlinStdLib,
         lifecycle,
-        material
+        material,
+        stetho
     )
 
     override fun modules(): List<String> = listOf(

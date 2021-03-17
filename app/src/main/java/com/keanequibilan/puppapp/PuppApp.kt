@@ -1,6 +1,7 @@
 package com.keanequibilan.puppapp
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.keanequibilan.database.DATABASE_MODULE
 import com.keanequibilan.puppapp.di.APP_MODULE
 import com.keanequibilan.puppapp.network.NETWORK_MODULE
@@ -20,6 +21,7 @@ class PuppApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Stetho.initializeWithDefaults(this)
         startKoin {
             androidContext(this@PuppApp)
             modules(appModules)

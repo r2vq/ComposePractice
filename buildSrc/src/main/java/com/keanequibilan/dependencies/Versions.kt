@@ -22,6 +22,7 @@ object Versions {
     const val moshi = "1.11.0"
     const val retrofit = "2.9.0"
     const val room = "2.2.6"
+    const val stetho = "1.5.1"
 
     // test
     const val junit = "4.13.2"

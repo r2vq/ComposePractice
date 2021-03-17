@@ -43,6 +43,7 @@ const val lifecycle =
 const val room = "androidx.room:room-runtime:${Versions.room}"
 const val roomAnnotations = "androidx.room:room-compiler:${Versions.room}"
 const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
 
 // dependency injection
 const val koin = "org.koin:koin-android-viewmodel:${Versions.koin}"
